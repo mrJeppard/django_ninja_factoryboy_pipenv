@@ -1,8 +1,8 @@
 # django + django ninja + factory boy + pipenv setup
 An example django RESTapi setup.
 
-### Install
-You'll need python3.8 installed to do the below.
+### Installation
+You'll need python3.8 and pipenv installed to get going.
 
 ```bash
 git clone https://github.com/mrJeppard/django_ninja_factoryboy_pipenv.git
