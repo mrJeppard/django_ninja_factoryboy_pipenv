@@ -1,10 +1,10 @@
-from character_api.models import CharacterRole
+from character_api.models import Role
 import factory
 
 
-class CharacterRoleFactory(factory.django.DjangoModelFactory):
+class RoleFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = CharacterRole
+        model = Role
 
     label = factory.Sequence(lambda n: 'label-%s' % n)
 

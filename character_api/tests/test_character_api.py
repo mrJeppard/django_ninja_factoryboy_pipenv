@@ -2,8 +2,8 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 from django import urls
 from character_api.tests.factories.user import UserFactory
-from character_api.tests.factories.character import CharacterRoleFactory
-from character_api.models import CharacterRole
+from character_api.tests.factories.character import RoleFactory
+from character_api.models import Role
 
 
 class TestCharacterRoleApi(TestCase):
@@ -25,7 +25,7 @@ class TestCharacterRoleApi(TestCase):
 
     def test_character_role_get(self):
         self.client.force_login(self.user)
-        role = CharacterRoleFactory.create(id=1, label="new-label")
+        role = RoleFactory.create(id=1, label="new-label")
         response = self.client.get(
             urls.reverse("api-1.0.0:character_role", args=[1])
         )
@@ -36,7 +36,7 @@ class TestCharacterRoleApi(TestCase):
 
     def test_get(self):
         self.client.force_login(self.user)
-        CharacterRoleFactory.create_batch(n_roles_in_db := 5)
+        RoleFactory.create_batch(n_roles_in_db := 5)
         response = self.client.get(self.URL)
         self.assertEqual(response.status_code, 200)
         json = response.json()
@@ -57,7 +57,7 @@ class TestCharacterRoleApi(TestCase):
         self.assertEqual(json["label"], data["label"])
         self.assertTrue("id" in json)
 
-        entity_created = CharacterRole.objects.filter(id=json["id"]).first() is not None
+        entity_created = Role.objects.filter(id=json["id"]).first() is not None
         self.assertTrue(
              entity_created
         )

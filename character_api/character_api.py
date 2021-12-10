@@ -19,7 +19,7 @@ def post_character_role(
     character_in: CharacterRoleIn
 ):
     """Doc strings are displayed in swagger documentation."""
-    return models.CharacterRole.objects.create(**character_in.dict())
+    return models.Role.objects.create(**character_in.dict())
 
 
 @router.get(
@@ -29,7 +29,7 @@ def post_character_role(
     url_name="character_role"
 )
 def get_character_role(request):
-    return models.CharacterRole.objects.all()
+    return models.Role.objects.all()
 
 
 @router.get(
@@ -39,6 +39,6 @@ def get_character_role(request):
     url_name="character_role"
 )
 def get_character_role(request, role_id: int):
-    return models.CharacterRole.objects.get(pk=role_id)
+    return models.Role.objects.get(pk=role_id)
 
 
