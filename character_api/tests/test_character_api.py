@@ -6,24 +6,33 @@ from character_api.tests.factories.character import CharacterRoleFactory
 from character_api.models import CharacterRole
 
 
-class TestClient(TestCase):
+class TestCharacterRoleApi(TestCase):
+    URL = urls.reverse("api-1.0.0:character_role")
+
     def setUp(self):
         self.client = APIClient()
         self.user = UserFactory()
 
-
-class TestCharacterRoleApi(TestClient):
-    URL = urls.reverse("api-1.0.0:character_role")
-
-    def test_get_not_logged_in_401(self):
+    def test_not_logged_in_401_get(self):
         response = self.client.get(self.URL, format='json')
         self.assertEqual(response.status_code, 401)
 
-    def test_post_not_logged_in_401(self):
+    def test_not_logged_in_401_post(self):
         response = self.client.post(
             self.URL, {"label": "hero"}, format='json'
         )
         self.assertEqual(response.status_code, 401)
+
+    def test_character_role_get(self):
+        self.client.force_login(self.user)
+        role = CharacterRoleFactory.create(id=1, label="new-label")
+        response = self.client.get(
+            urls.reverse("api-1.0.0:character_role", args=[1])
+        )
+        self.assertEqual(response.status_code, 200)
+        json = response.json()
+        self.assertEqual(json["id"], role.id)
+        self.assertEqual((json["label"]), role.label)
 
     def test_get(self):
         self.client.force_login(self.user)
@@ -52,6 +61,3 @@ class TestCharacterRoleApi(TestClient):
         self.assertTrue(
              entity_created
         )
-
-
-
