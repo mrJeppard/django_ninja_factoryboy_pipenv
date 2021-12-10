@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from character_api.character_api import role_router
+from character_api.role_api import role_router
 from ninja import NinjaAPI
 from django.core.exceptions import ObjectDoesNotExist
 
