@@ -1,10 +1,10 @@
 from ninja import Schema
 
 
-class CharacterRoleIn(Schema):
+class RoleIn(Schema):
     label: str
 
 
-class CharacterRoleOut(Schema):
+class RoleOut(Schema):
     label: str
     id: int
