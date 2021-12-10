@@ -7,6 +7,3 @@ class RoleFactory(factory.django.DjangoModelFactory):
         model = Role
 
     label = factory.Sequence(lambda n: 'label-%s' % n)
-
-
-

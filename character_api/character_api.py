@@ -5,38 +5,42 @@ from character_api.schemas import CharacterRoleOut, CharacterRoleIn
 from ninja.security import django_auth
 
 
-router = Router()
+role_router = Router()
 
 
-@router.post(
-    '/role',
+@role_router.post(
+    '/',
     response=CharacterRoleOut,
     auth=django_auth,
-    url_name="character_role"
+    url_name="character_role",
+    tags=["Role"]
+
 )
 def post_character_role(
     request,
-    character_in: CharacterRoleIn
+    character_in: CharacterRoleIn,
 ):
     """Doc strings are displayed in swagger documentation."""
     return models.Role.objects.create(**character_in.dict())
 
 
-@router.get(
-    '/role',
+@role_router.get(
+    '/',
     response=List[CharacterRoleOut],
     auth=django_auth,
-    url_name="character_role"
+    url_name="character_role",
+    tags=["Role"]
 )
-def get_character_role(request):
+def get_character_roles(request):
     return models.Role.objects.all()
 
 
-@router.get(
-    '/role/{role_id}',
+@role_router.get(
+    '/{role_id}',
     response=CharacterRoleOut,
     auth=django_auth,
-    url_name="character_role"
+    url_name="character_role",
+    tags=["Role"]
 )
 def get_character_role(request, role_id: int):
     return models.Role.objects.get(pk=role_id)

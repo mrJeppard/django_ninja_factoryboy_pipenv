@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from character_api.character_api import router as character_router
+from character_api.character_api import role_router
 from ninja import NinjaAPI
 
 
 api = NinjaAPI(csrf=True)
-api.add_router('/character_api', character_router)
+api.add_router('/role', role_router)
 
 
 urlpatterns = [
