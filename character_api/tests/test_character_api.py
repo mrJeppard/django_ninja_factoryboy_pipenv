@@ -6,7 +6,7 @@ from character_api.tests.factories.character import RoleFactory
 from character_api.models import Role
 
 
-class TestCharacterRoleApi(TestCase):
+class TestRoleApi(TestCase):
     URL = urls.reverse("api-1.0.0:character_role")
 
     def setUp(self):
@@ -22,6 +22,13 @@ class TestCharacterRoleApi(TestCase):
             self.URL, {"label": "hero"}, format='json'
         )
         self.assertEqual(response.status_code, 401)
+
+    def test_role_get_404_not_there(self):
+        self.client.force_login(self.user)
+        response = self.client.get(
+            urls.reverse("api-1.0.0:character_role", args=[1])
+        )
+        self.assertEqual(response.status_code, 404)
 
     def test_character_role_get(self):
         self.client.force_login(self.user)
