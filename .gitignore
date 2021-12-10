@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
+character_api/migrations/000*
 # Distribution / packaging
 .Python
 build/
