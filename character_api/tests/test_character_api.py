@@ -1,9 +1,9 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
 from django import urls
 from character_api.tests.factories.user import UserFactory
 from character_api.tests.factories.character import RoleFactory
 from character_api.models import Role
+from character_api.tests.client import APIClient
 
 
 class TestRoleApi(TestCase):
